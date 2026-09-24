@@ -1,0 +1,153 @@
+﻿╔════════════════════════════════════════════════════════════════╗
+║                                                                ║
+║         🎉 BIENVENIDO A MI CONTROL FINANCIERO 🎉              ║
+║                                                                ║
+║     Tu aplicación personal para gestionar dinero              ║
+║                                                                ║
+╚════════════════════════════════════════════════════════════════╝
+
+📌 ANTES DE COMENZAR:
+
+   Este proyecto está 100% listo para usar.
+   Solo necesitas 3 cosas:
+
+   1. Node.js ✅ (ya tienes: node-v20.19.0-win-x64/)
+   2. Supabase ✅ (ya configurado en .env.local)
+   3. Crear 4 tablas en Supabase (5 minutos)
+
+
+⏱️ TIEMPO TOTAL: 15 MINUTOS
+
+
+📖 SIGUE ESTOS PASOS:
+
+
+PASO 1: LEE ESTO PRIMERO
+════════════════════════
+   Archivo: SETUP_RAPIDO.md
+   
+   ⏭️  Abrirlo ahora en tu editor de texto
+
+
+PASO 2: VE A SUPABASE
+════════════════════════
+   1. Abre: https://app.supabase.com
+   2. Inicia sesión con tu cuenta
+   3. Selecciona tu proyecto "mi-control-financiero"
+
+
+PASO 3: COPIA EL SQL
+════════════════════════
+   1. En Supabase, ve a: SQL Editor (menú izquierdo)
+   2. Click en: "New query"
+   3. Abre archivo: SETUP_RAPIDO.md
+   4. Copia TODO el SQL (código entre los markers)
+   5. Pega en Supabase SQL Editor
+   6. Click en: "Run" (botón verde)
+
+
+PASO 4: ESPERA A QUE TERMINE
+════════════════════════════
+   La ejecución demora ~2 segundos.
+   Verás un mensaje: "Query executed successfully"
+
+
+PASO 5: INICIA LA APP
+════════════════════════
+   Opción A (RECOMENDADO):
+   └─ Haz DOBLE CLIC en: start.cmd
+   
+   Opción B (Terminal):
+   └─ PowerShell en la carpeta
+   └─ Escribe: npm run dev
+
+
+PASO 6: ABRE EN NAVEGADOR
+════════════════════════════
+   Tu navegador se abrirá automáticamente en:
+   
+   👉 http://localhost:3000
+   
+   Si no se abre, cópialo y pégalo en la barra de direcciones.
+
+
+✅ ¡LISTO!
+════════════════════════════
+   Ahora puedes:
+   
+   ➕ Agregar movimientos (ingresos/gastos)
+   📊 Ver tu dashboard
+   📈 Registrar ingresos fijos
+   📉 Controlar gastos fijos
+   ⚠️  Seguir deudas
+   ⚙️  Configurar tu app
+
+
+🆘 SI ALGO FALLA
+════════════════════════════
+   
+   ❌ "npm no es reconocido"
+   └─ Usa: start.cmd (sin terminal)
+   
+   ❌ "Tabla no existe"
+   └─ No creaste las tablas en Supabase
+   └─ Vuelve al PASO 3
+   
+   ❌ "Error de conexión"
+   └─ Verifica .env.local tiene valores correctos
+   └─ Revisa que NEXT_PUBLIC_SUPABASE_URL es válida
+   
+   ❌ Página en blanco en localhost:3000
+   └─ Espera 10 segundos (primera carga es lenta)
+   └─ Presiona F5 para refrescar
+
+
+📚 ARCHIVOS IMPORTANTES
+════════════════════════════
+   
+   COMIENZA_AQUI.txt      ← Estás aquí 👈
+   SETUP_RAPIDO.md        ← Lee después de esto
+   .env.local             ← Credenciales (NO edites)
+   start.cmd              ← Ejecuta para correr app
+   README.md              ← Documentación completa
+
+
+💡 TIPS
+════════════════════════════
+   
+   • La primera ejecución tarda más (compila TypeScript)
+   • Si cambias código, se actualiza automáticamente
+   • Los datos se guardan en Supabase (nube)
+   • Puedes usar la app offline, pero se sincroniza al conectar
+
+
+🔐 SEGURIDAD
+════════════════════════════
+   
+   • NUNCA compartas tu archivo .env.local
+   • NUNCA publiques el código con .env.local en Git
+   • Las credenciales ya están configuradas
+
+
+📞 PRÓXIMOS PASOS
+════════════════════════════
+   
+   1. Lee SETUP_RAPIDO.md (2 min)
+   2. Copia SQL a Supabase (2 min)
+   3. Corre la app (start.cmd)
+   4. ¡Comienza a usar!
+
+
+¿LISTO? 🚀
+════════════════════════════
+   
+   Abre: SETUP_RAPIDO.md
+   Y sigue los pasos exactos.
+   
+   ¡No hay nada complicado, es muy simple!
+
+
+════════════════════════════════════════════════════════════════
+Última actualización: 2026-09-24
+Versión: 1.0.0
+════════════════════════════════════════════════════════════════

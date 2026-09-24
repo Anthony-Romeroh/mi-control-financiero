@@ -1,0 +1,60 @@
+﻿CARACTERISTICAS DE MI CONTROL FINANCIERO
+=========================================
+
+VERSION: 1.0.0
+ULTIMA ACTUALIZACION: 2026-09-24
+ESTADO: 100% Funcional
+
+PANTALLAS:
+
+1. RESUMEN - Dashboard con estadisticas
+   - Saldo, Ingresos, Gastos, Deudas
+   - Ultimos movimientos
+
+2. NUEVO REGISTRO - Agregar movimientos
+   - Ingresos: Trabajo 1, Trabajo 2, Propina
+   - Gastos: Abono Deuda
+
+3. INGRESOS - Ingresos recurrentes
+   - Semanal, Quincena, Mensual
+   - Ver total mensual
+
+4. GASTOS - Gastos fijos
+   - Con dia de vencimiento
+   - Total mensual automatico
+
+5. DEUDAS - Seguimiento de deudas
+   - Registrar pagos parciales
+   - Barra de progreso
+
+6. CONFIG - Configuracion
+   - Tema, Notificaciones, Info
+
+TECNOLOGIAS:
+- Next.js 14
+- React + TypeScript
+- Supabase (base de datos)
+- Node.js 20
+
+DISPOSITIVOS:
+- Desktop (Windows, Mac, Linux)
+- Tablet
+- Celular
+
+ARCHIVOS IMPORTANTES:
+
+COMIENZA_AQUI.txt - Lee primero
+SETUP_RAPIDO.md - Pasos rapidos
+README.md - Doc completa
+DATOS_SUPABASE.txt - Credenciales
+start.cmd - Ejecutar app
+.env.local - Variables (NO EDITES)
+.env.example - Plantilla
+
+¿LISTO?
+======
+
+1. Lee COMIENZA_AQUI.txt
+2. Sigue SETUP_RAPIDO.md
+3. Haz doble clic en start.cmd
+4. Abre http://localhost:3000

@@ -1,0 +1,97 @@
+﻿==========================================
+DONDE OBTENER TUS CREDENCIALES SUPABASE
+==========================================
+
+TU PROYECTO YA ESTA CONFIGURADO EN: .env.local
+
+Pero si necesitas cambiar o verificar las credenciales:
+
+
+PASO 1: Ve a Supabase Dashboard
+================================
+
+1. Abre: https://app.supabase.com
+2. Inicia sesion
+3. Selecciona: mi-control-financiero
+
+
+PASO 2: Ve a Settings > API
+================================
+
+En el menu izquierdo:
+
+proyecto
+  - Home
+  - SQL Editor
+  - Table Editor
+  - Settings
+    - API  <-- AQUI
+
+Click en API
+
+
+PASO 3: Copia tus valores
+================================
+
+En la pagina API, veras:
+
+Project URL:
+-----------
+Copia esta URL y pegala en .env.local como:
+NEXT_PUBLIC_SUPABASE_URL=TU_URL_AQUI
+
+Example:
+NEXT_PUBLIC_SUPABASE_URL=https://qtwbrtferoskplkvubem.supabase.co
+
+
+API Keys:
+---------
+Busca la seccion "Project API Keys"
+
+Usa la clave "anon" (publica):
+-----------
+Copia y pegala en .env.local como:
+NEXT_PUBLIC_SUPABASE_ANON_KEY=TU_CLAVE_AQUI
+
+Example:
+NEXT_PUBLIC_SUPABASE_ANON_KEY=sb_publishable_uHwBCMr0yb-PLIEs7fQxTQ_IIvmo4P-
+
+
+IMPORTANTE:
+==========
+
+- NUNCA uses la secret key (es privada)
+- NUNCA incluyas tus credenciales en Git
+- NUNCA compartas el archivo .env.local
+- Solo usa la "anon" key en el frontend
+
+
+TU ARCHIVO .env.local:
+======================
+
+Deberia verse asi:
+
+NEXT_PUBLIC_SUPABASE_URL=https://qtwbrtferoskplkvubem.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=sb_publishable_uHwBCMr0yb-PLIEs7fQxTQ_IIvmo4P-
+
+
+¿DONDE ESTA MI .env.local?
+===========================
+
+En la raiz del proyecto:
+mi-control-financiero/.env.local
+
+Si no lo ves, puede estar oculto.
+En Windows, habilita "Mostrar archivos ocultos" en Vista.
+
+
+¿MI APP NO CONECTA A SUPABASE?
+==============================
+
+Verifica:
+1. El .env.local tiene valores correctos
+2. La URL es valida (no falta nada)
+3. Las tablas fueron creadas en Supabase
+4. Tienes conexion a internet
+
+Si aun falla, ve a Browser Console (F12) y busca el error.
