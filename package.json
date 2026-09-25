@@ -1,6 +1,5 @@
 ﻿{
-  "name": "mi-control-financiero"
-  // Deployed to Vercel,
+  "name": "mi-control-financiero",
   "version": "1.0.0",
   "description": "App de control de ingresos, gastos y deudas",
   "scripts": {
