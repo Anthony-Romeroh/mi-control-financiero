@@ -1,16 +1,4 @@
 {
-  "env": [
-    {
-      "key": "NEXT_PUBLIC_SUPABASE_URL",
-      "description": "URL del proyecto Supabase (https://xxx.supabase.co)",
-      "value": ""
-    },
-    {
-      "key": "NEXT_PUBLIC_SUPABASE_ANON_KEY",
-      "description": "Anon public key de Supabase",
-      "value": ""
-    }
-  ],
   "buildCommand": "npm run build",
   "outputDirectory": ".next",
   "regions": ["sfo1"]
