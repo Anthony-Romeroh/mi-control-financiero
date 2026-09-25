@@ -1,6 +1,7 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { useRouter } from 'next/navigation'
 import { Sidebar } from '@/components/Sidebar'
 import { FormMovimiento } from '@/components/FormMovimiento'
 import { Resumen } from '@/components/Resumen'
@@ -13,12 +14,44 @@ import { addMovimiento } from '@/lib/api'
 
 // Deployed to Vercel
 export default function Home() {
+  const router = useRouter()
   const [activeScreen, setActiveScreen] = useState('resumen')
   const [refreshKey, setRefreshKey] = useState(0)
+  const [usuarioActual, setUsuarioActual] = useState<any>(null)
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    const usuario = localStorage.getItem('usuarioActual')
+    if (!usuario) {
+      router.push('/login')
+    } else {
+      setUsuarioActual(JSON.parse(usuario))
+      setLoading(false)
+    }
+  }, [router])
 
   const handleAddMovimiento = async (movimiento: any) => {
     await addMovimiento(movimiento)
     setRefreshKey(prev => prev + 1)
+  }
+
+  const handleLogout = () => {
+    if (confirm('¿Cerrar sesión?')) {
+      localStorage.removeItem('usuarioActual')
+      router.push('/login')
+    }
+  }
+
+  if (loading) {
+    return (
+      <div style={styles.loadingContainer}>
+        <div style={styles.loadingText}>Cargando...</div>
+      </div>
+    )
+  }
+
+  if (!usuarioActual) {
+    return null
   }
 
   return (
@@ -28,9 +61,16 @@ export default function Home() {
       <main style={styles.main}>
         <header style={styles.header}>
           <h1 style={styles.headerTitle}>Mi Control Financiero</h1>
+          <div style={styles.headerCenter}>
+            <span style={styles.usuarioInfo}>
+              {usuarioActual?.rol === 'master' ? '👑' : '👤'} {usuarioActual?.nombre}
+            </span>
+          </div>
           <div style={styles.headerActions}>
             <a href="/manual" style={{...styles.headerBtn, textDecoration: 'none', color: 'inherit'}}>📖</a>
-            <button style={styles.headerBtn}>⚙️</button>
+            <button onClick={handleLogout} style={styles.headerBtn} title="Logout">
+              🚪
+            </button>
           </div>
         </header>
 
@@ -47,7 +87,7 @@ export default function Home() {
 
           {activeScreen === 'deudas' && <Deudas />}
 
-          {activeScreen === 'usuarios' && <Usuarios usuarioActual={{ rol: 'master' }} />}
+          {activeScreen === 'usuarios' && <Usuarios usuarioActual={usuarioActual} />}
 
           {activeScreen === 'config' && <Config />}
         </div>
@@ -81,9 +121,31 @@ const styles = {
     fontWeight: 600,
     color: 'var(--text-primary)',
   },
+  headerCenter: {
+    flex: 1,
+    textAlign: 'center' as const,
+    fontSize: '12px',
+    color: 'var(--text-secondary)',
+  },
+  usuarioInfo: {
+    fontSize: '12px',
+    color: 'var(--text-primary)',
+    fontWeight: 500,
+  },
   headerActions: {
     display: 'flex',
     gap: '8px',
+  },
+  loadingContainer: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: '100vh',
+    background: 'var(--surface-0)',
+  },
+  loadingText: {
+    fontSize: '14px',
+    color: 'var(--text-secondary)',
   },
   headerBtn: {
     padding: '6px 10px',
