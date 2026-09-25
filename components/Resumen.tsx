@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { getMovimientos } from '@/lib/api'
+import { getMovimientos, getGastosFijos, getDeudas } from '@/lib/api'
 
 export function Resumen() {
   const [stats, setStats] = useState({
@@ -19,7 +19,12 @@ export function Resumen() {
 
   const loadData = async () => {
     try {
-      const movs = await getMovimientos()
+      const [movs, gastosList, deudasList] = await Promise.all([
+        getMovimientos(),
+        getGastosFijos(),
+        getDeudas(),
+      ])
+
       if (movs && movs.length > 0) {
         const ultimosCinco = movs.slice(0, 5)
         setMovimientos(ultimosCinco)
@@ -35,12 +40,26 @@ export function Resumen() {
           }
         })
 
+        const totalGastos = gastosList?.reduce((sum, g) => sum + (g.monto || 0), 0) || 0
+        const totalDeudas = deudasList?.reduce((sum, d) => sum + ((d.monto_total || 0) - (d.monto_pagado || 0)), 0) || 0
+
         setStats({
-          saldo: ingresos - egresos,
+          saldo: ingresos - egresos - totalGastos - totalDeudas,
           ingresos,
-          gastos: 1270,
-          deudas: 10800,
+          gastos: totalGastos,
+          deudas: totalDeudas,
         })
+      } else {
+        const totalGastos = gastosList?.reduce((sum, g) => sum + (g.monto || 0), 0) || 0
+        const totalDeudas = deudasList?.reduce((sum, d) => sum + ((d.monto_total || 0) - (d.monto_pagado || 0)), 0) || 0
+
+        setStats({
+          saldo: 0 - totalGastos - totalDeudas,
+          ingresos: 0,
+          gastos: totalGastos,
+          deudas: totalDeudas,
+        })
+        setMovimientos([])
       }
     } catch (error) {
       console.error('Error cargando datos:', error)
