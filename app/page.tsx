@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import { useState } from 'react'
 import { Sidebar } from '@/components/Sidebar'
@@ -10,6 +10,7 @@ import { Deudas } from '@/components/Deudas'
 import { Config } from '@/components/Config'
 import { addMovimiento } from '@/lib/api'
 
+// Deployed to Vercel
 export default function Home() {
   const [activeScreen, setActiveScreen] = useState('resumen')
   const [refreshKey, setRefreshKey] = useState(0)
@@ -27,8 +28,8 @@ export default function Home() {
         <header style={styles.header}>
           <h1 style={styles.headerTitle}>Mi Control Financiero</h1>
           <div style={styles.headerActions}>
-            <button style={styles.headerBtn}>⚙️</button>
-            <button style={styles.headerBtn}>🔔</button>
+            <button style={styles.headerBtn}>âš™ï¸</button>
+            <button style={styles.headerBtn}>ðŸ””</button>
           </div>
         </header>
 
@@ -102,3 +103,4 @@ const styles = {
     textAlign: 'center' as const,
   },
 }
+
