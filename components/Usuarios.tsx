@@ -9,11 +9,13 @@ interface UsuariosProps {
 
 export function Usuarios({ usuarioActual }: UsuariosProps) {
   const [usuarios, setUsuarios] = useState<any[]>([])
-  const [esMaster] = useState(usuarioActual?.rol === 'master')
+  const esMaster = usuarioActual?.rol === 'master'
 
   useEffect(() => {
-    loadUsuarios()
-  }, [])
+    if (esMaster) {
+      loadUsuarios()
+    }
+  }, [esMaster])
 
   const loadUsuarios = async () => {
     try {
@@ -25,11 +27,6 @@ export function Usuarios({ usuarioActual }: UsuariosProps) {
   }
 
   const handleAprobacion = async (id: string, estado: 'aprobado' | 'rechazado') => {
-    if (!esMaster) {
-      alert('Solo Master puede aprobar usuarios')
-      return
-    }
-
     try {
       await updateUsuario(id, { estado })
       await loadUsuarios()
@@ -39,11 +36,6 @@ export function Usuarios({ usuarioActual }: UsuariosProps) {
   }
 
   const handleEliminar = async (id: string) => {
-    if (!esMaster) {
-      alert('Solo Master puede eliminar usuarios')
-      return
-    }
-
     if (!confirm('¿Eliminar este usuario?')) return
 
     try {
@@ -54,6 +46,17 @@ export function Usuarios({ usuarioActual }: UsuariosProps) {
     }
   }
 
+  if (!esMaster) {
+    return (
+      <div style={styles.container}>
+        <h2 style={styles.title}>Acceso Denegado</h2>
+        <div style={styles.errorBox}>
+          ⛔ Solo usuarios Master pueden acceder a esta sección
+        </div>
+      </div>
+    )
+  }
+
   const pendientes = usuarios.filter((u) => u.estado === 'pendiente')
   const aprobados = usuarios.filter((u) => u.estado === 'aprobado')
   const rechazados = usuarios.filter((u) => u.estado === 'rechazado')
@@ -61,12 +64,6 @@ export function Usuarios({ usuarioActual }: UsuariosProps) {
   return (
     <div style={styles.container}>
       <h2 style={styles.title}>Gestión de Usuarios</h2>
-
-      {!esMaster && (
-        <div style={styles.warning}>
-          ⚠️ Solo usuarios Master pueden aprobar/rechazar registros
-        </div>
-      )}
 
       {/* PENDIENTES DE APROBACIÓN */}
       <section style={styles.section}>
@@ -86,24 +83,22 @@ export function Usuarios({ usuarioActual }: UsuariosProps) {
                     Solicitud: {new Date(user.created_at).toLocaleDateString()}
                   </div>
                 </div>
-                {esMaster && (
-                  <div style={styles.actions}>
-                    <button
-                      onClick={() => handleAprobacion(user.id, 'aprobado')}
-                      style={styles.btnAprobar}
-                      title="Aprobar"
-                    >
-                      ✅
-                    </button>
-                    <button
-                      onClick={() => handleAprobacion(user.id, 'rechazado')}
-                      style={styles.btnRechazar}
-                      title="Rechazar"
-                    >
-                      ❌
-                    </button>
-                  </div>
-                )}
+                <div style={styles.actions}>
+                  <button
+                    onClick={() => handleAprobacion(user.id, 'aprobado')}
+                    style={styles.btnAprobar}
+                    title="Aprobar"
+                  >
+                    ✅
+                  </button>
+                  <button
+                    onClick={() => handleAprobacion(user.id, 'rechazado')}
+                    style={styles.btnRechazar}
+                    title="Rechazar"
+                  >
+                    ❌
+                  </button>
+                </div>
               </div>
             ))}
           </div>
@@ -128,7 +123,7 @@ export function Usuarios({ usuarioActual }: UsuariosProps) {
                     {user.rol === 'master' ? '👑 Master' : '👤 Normal'}
                   </div>
                 </div>
-                {esMaster && user.rol !== 'master' && (
+                {user.rol !== 'master' && (
                   <button
                     onClick={() => handleEliminar(user.id)}
                     style={styles.deleteBtn}
@@ -156,15 +151,13 @@ export function Usuarios({ usuarioActual }: UsuariosProps) {
                   <div style={styles.itemName}>{user.nombre}</div>
                   <div style={styles.itemDetail}>{user.email}</div>
                 </div>
-                {esMaster && (
-                  <button
-                    onClick={() => handleEliminar(user.id)}
-                    style={styles.deleteBtn}
-                    title="Eliminar"
-                  >
-                    🗑️
-                  </button>
-                )}
+                <button
+                  onClick={() => handleEliminar(user.id)}
+                  style={styles.deleteBtn}
+                  title="Eliminar"
+                >
+                  🗑️
+                </button>
               </div>
             ))}
           </div>
@@ -188,14 +181,14 @@ const styles = {
     marginBottom: '1rem',
     color: 'var(--text-primary)',
   },
-  warning: {
-    background: 'var(--bg-warning)',
-    color: 'var(--text-warning)',
+  errorBox: {
+    background: 'var(--bg-danger)',
+    color: 'var(--text-danger)',
     border: '0.5px solid var(--border)',
-    padding: '10px 12px',
+    padding: '12px',
     borderRadius: '6px',
-    fontSize: '12px',
-    marginBottom: '1.5rem',
+    fontSize: '14px',
+    textAlign: 'center' as const,
   },
   section: {
     marginBottom: '1.5rem',
