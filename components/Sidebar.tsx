@@ -12,6 +12,7 @@ export function Sidebar({ activeScreen, onScreenChange }: SidebarProps) {
     { id: 'ingresos', label: 'Ingresos', icon: '📈' },
     { id: 'gastos', label: 'Gastos', icon: '📉' },
     { id: 'deudas', label: 'Deudas', icon: '⚠️' },
+    { id: 'usuarios', label: 'Usuarios', icon: '👥' },
     { id: 'config', label: 'Config', icon: '⚙️' },
   ]
 

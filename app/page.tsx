@@ -7,6 +7,7 @@ import { Resumen } from '@/components/Resumen'
 import { Ingresos } from '@/components/Ingresos'
 import { Gastos } from '@/components/Gastos'
 import { Deudas } from '@/components/Deudas'
+import { Usuarios } from '@/components/Usuarios'
 import { Config } from '@/components/Config'
 import { addMovimiento } from '@/lib/api'
 
@@ -45,6 +46,8 @@ export default function Home() {
           {activeScreen === 'gastos' && <Gastos />}
 
           {activeScreen === 'deudas' && <Deudas />}
+
+          {activeScreen === 'usuarios' && <Usuarios usuarioActual={{ rol: 'master' }} />}
 
           {activeScreen === 'config' && <Config />}
         </div>

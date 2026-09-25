@@ -40,3 +40,13 @@ export type Deuda = {
   dia_vencimiento: number
   created_at?: string
 }
+
+export type Usuario = {
+  id?: string
+  email: string
+  nombre: string
+  rol: 'master' | 'normal'
+  estado: 'pendiente' | 'aprobado' | 'rechazado'
+  password?: string
+  created_at?: string
+}

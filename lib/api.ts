@@ -1,4 +1,4 @@
-import { supabase, Movimiento, IngresoFijo, GastoFijo, Deuda } from './supabase'
+import { supabase, Movimiento, IngresoFijo, GastoFijo, Deuda, Usuario } from './supabase'
 
 // MOVIMIENTOS
 export async function getMovimientos(): Promise<Movimiento[]> {
@@ -286,5 +286,69 @@ export async function getResumen() {
       balance: 0,
       deudaTotal: 0
     }
+  }
+}
+
+// USUARIOS
+export async function getUsuarios(): Promise<Usuario[]> {
+  try {
+    const { data, error } = await supabase
+      .from('usuarios')
+      .select('*')
+      .order('created_at', { ascending: false })
+
+    if (error) {
+      console.error('Error getUsuarios:', error)
+      return []
+    }
+    return (data as Usuario[]) || []
+  } catch (error) {
+    console.error('Exception getUsuarios:', error)
+    return []
+  }
+}
+
+export async function addUsuario(usuario: Omit<Usuario, 'id' | 'created_at'>) {
+  try {
+    const { data, error } = await supabase
+      .from('usuarios')
+      .insert([usuario])
+      .select()
+
+    if (error) throw error
+    return data
+  } catch (error) {
+    console.error('Error addUsuario:', error)
+    throw error
+  }
+}
+
+export async function updateUsuario(id: string, usuario: Partial<Usuario>) {
+  try {
+    const { data, error } = await supabase
+      .from('usuarios')
+      .update(usuario)
+      .eq('id', id)
+      .select()
+
+    if (error) throw error
+    return data
+  } catch (error) {
+    console.error('Error updateUsuario:', error)
+    throw error
+  }
+}
+
+export async function deleteUsuario(id: string) {
+  try {
+    const { error } = await supabase
+      .from('usuarios')
+      .delete()
+      .eq('id', id)
+
+    if (error) throw error
+  } catch (error) {
+    console.error('Error deleteUsuario:', error)
+    throw error
   }
 }
