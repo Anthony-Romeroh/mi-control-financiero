@@ -1,4 +1,4 @@
-﻿{
+{
   "name": "mi-control-financiero",
   "version": "1.0.0",
   "description": "App de control de ingresos, gastos y deudas",
@@ -20,4 +20,3 @@
     "typescript": "^5"
   }
 }
-
