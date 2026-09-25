@@ -9,7 +9,6 @@ export function Deudas() {
     { id: '2', nombre: 'Préstamo personal', monto_total: 2000, monto_pagado: 200, dia_vencimiento: 15 },
     { id: '3', nombre: 'Cuota auto', monto_total: 8000, monto_pagado: 2000, dia_vencimiento: 25 },
   ])
-  const [loading, setLoading] = useState(false)
   const [form, setForm] = useState({
     nombre: '',
     monto_total: '',
@@ -29,8 +28,6 @@ export function Deudas() {
       }
     } catch (error) {
       console.error('Error:', error)
-    } finally {
-      setLoading(false)
     }
   }
 
