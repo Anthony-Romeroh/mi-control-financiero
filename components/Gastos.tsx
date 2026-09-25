@@ -10,7 +10,6 @@ export function Gastos() {
     { id: '3', nombre: 'Internet', monto: 50, dia_vencimiento: 20 },
     { id: '4', nombre: 'Comida', monto: 300, dia_vencimiento: 28 },
   ])
-  const [loading, setLoading] = useState(false)
   const [form, setForm] = useState({ nombre: '', monto: '', dia_vencimiento: '1' })
 
   useEffect(() => {

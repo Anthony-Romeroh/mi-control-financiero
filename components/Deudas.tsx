@@ -9,6 +9,7 @@ export function Deudas() {
     { id: '2', nombre: 'Préstamo personal', monto_total: 2000, monto_pagado: 200, dia_vencimiento: 15 },
     { id: '3', nombre: 'Cuota auto', monto_total: 8000, monto_pagado: 2000, dia_vencimiento: 25 },
   ])
+  const [loading, setLoading] = useState(false)
   const [form, setForm] = useState({
     nombre: '',
     monto_total: '',
@@ -179,7 +180,7 @@ export function Deudas() {
           <span>Pagado:</span>
           <strong style={{ color: 'var(--text-success)' }}>+${totalPagado.toFixed(2)}</strong>
         </div>
-        <div style={styles.summaryRow} style={{ borderTop: '0.5px solid var(--border)', paddingTop: '8px', marginTop: '8px' }}>
+        <div style={{ ...styles.summaryRow, borderTop: '0.5px solid var(--border)', paddingTop: '8px', marginTop: '8px' }}>
           <span>Pendiente:</span>
           <strong style={{ color: 'var(--text-danger)', fontSize: '14px' }}>
             ${totalPendiente.toFixed(2)}

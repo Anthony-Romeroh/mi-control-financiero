@@ -9,7 +9,6 @@ export function Ingresos() {
     { id: '2', nombre: 'Trabajo 2', monto: 1800, frecuencia: 'mensual' },
     { id: '3', nombre: 'Propinas', monto: 1250.50, frecuencia: 'semanal' },
   ])
-  const [loading, setLoading] = useState(false)
   const [form, setForm] = useState({ nombre: '', monto: '', frecuencia: 'mensual' })
 
   useEffect(() => {

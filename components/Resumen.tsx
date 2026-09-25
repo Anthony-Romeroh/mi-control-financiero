@@ -19,12 +19,6 @@ export function Resumen() {
     { id: '5', fecha: '2026-09-10', tipo: 'Propina', descripcion: 'Propina extra', monto: 100.50 },
   ])
 
-  const proximos = [
-    { fecha: '2026-09-30', concepto: 'Alquiler vencimiento', monto: 800, tipo: 'gasto' },
-    { fecha: '2026-10-05', concepto: 'Servicios vencimiento', monto: 120, tipo: 'gasto' },
-    { fecha: '2026-10-15', concepto: 'Pago deuda préstamo', monto: 200, tipo: 'deuda' },
-  ]
-
   useEffect(() => {
     loadData()
   }, [])
