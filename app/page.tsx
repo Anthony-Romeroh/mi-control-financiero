@@ -87,7 +87,14 @@ export default function Home() {
 
           {activeScreen === 'deudas' && <Deudas usuarioId={usuarioActual?.id} />}
 
-          {activeScreen === 'usuarios' && <Usuarios usuarioActual={usuarioActual} />}
+          {activeScreen === 'usuarios' && usuarioActual?.rol === 'master' ? (
+            <Usuarios usuarioActual={usuarioActual} />
+          ) : activeScreen === 'usuarios' ? (
+            <div style={styles.accesoDenegado}>
+              <h2>Acceso Denegado</h2>
+              <p>⛔ Solo usuarios Master pueden acceder a esta sección</p>
+            </div>
+          ) : null}
 
           {activeScreen === 'config' && <Config />}
         </div>
@@ -146,6 +153,14 @@ const styles = {
   loadingText: {
     fontSize: '14px',
     color: 'var(--text-secondary)',
+  },
+  accesoDenegado: {
+    background: 'var(--surface-1)',
+    border: '0.5px solid var(--border)',
+    borderRadius: '8px',
+    padding: '2rem',
+    maxWidth: '600px',
+    textAlign: 'center' as const,
   },
   headerBtn: {
     padding: '6px 10px',
