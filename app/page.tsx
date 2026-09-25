@@ -75,17 +75,17 @@ export default function Home() {
         </header>
 
         <div style={styles.content}>
-          {activeScreen === 'resumen' && <Resumen key={refreshKey} />}
+          {activeScreen === 'resumen' && <Resumen key={refreshKey} usuarioId={usuarioActual?.id} />}
 
           {activeScreen === 'formulario' && (
-            <FormMovimiento onSubmit={handleAddMovimiento} />
+            <FormMovimiento onSubmit={handleAddMovimiento} usuarioId={usuarioActual?.id} />
           )}
 
-          {activeScreen === 'ingresos' && <Ingresos />}
+          {activeScreen === 'ingresos' && <Ingresos usuarioId={usuarioActual?.id} />}
 
-          {activeScreen === 'gastos' && <Gastos />}
+          {activeScreen === 'gastos' && <Gastos usuarioId={usuarioActual?.id} />}
 
-          {activeScreen === 'deudas' && <Deudas />}
+          {activeScreen === 'deudas' && <Deudas usuarioId={usuarioActual?.id} />}
 
           {activeScreen === 'usuarios' && <Usuarios usuarioActual={usuarioActual} />}
 

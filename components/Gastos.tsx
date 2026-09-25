@@ -3,7 +3,11 @@
 import { useState, useEffect } from 'react'
 import { getGastosFijos, addGastoFijo, deleteGastoFijo } from '@/lib/api'
 
-export function Gastos() {
+interface GastosProps {
+  usuarioId?: string
+}
+
+export function Gastos({ usuarioId }: GastosProps) {
   const [gastos, setGastos] = useState<any[]>([])
   const [form, setForm] = useState({ nombre: '', monto: '', dia_vencimiento: '1' })
 
@@ -13,7 +17,7 @@ export function Gastos() {
 
   const loadGastos = async () => {
     try {
-      const data = await getGastosFijos()
+      const data = await getGastosFijos(usuarioId)
       if (data && data.length > 0) {
         setGastos(data)
       }
@@ -31,6 +35,7 @@ export function Gastos() {
 
     try {
       await addGastoFijo({
+        usuario_id: usuarioId,
         nombre: form.nombre,
         monto: parseFloat(form.monto),
         dia_vencimiento: parseInt(form.dia_vencimiento),

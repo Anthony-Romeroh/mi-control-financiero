@@ -3,7 +3,11 @@
 import { useState, useEffect } from 'react'
 import { getMovimientos, getGastosFijos, getDeudas } from '@/lib/api'
 
-export function Resumen() {
+interface ResumenProps {
+  usuarioId?: string
+}
+
+export function Resumen({ usuarioId }: ResumenProps) {
   const [stats, setStats] = useState({
     saldo: 0,
     ingresos: 0,
@@ -35,9 +39,9 @@ export function Resumen() {
   const loadData = async () => {
     try {
       const [movs, gastosList, deudasList] = await Promise.all([
-        getMovimientos(),
-        getGastosFijos(),
-        getDeudas(),
+        getMovimientos(usuarioId),
+        getGastosFijos(usuarioId),
+        getDeudas(usuarioId),
       ])
 
       if (movs && movs.length > 0) {
@@ -64,8 +68,8 @@ export function Resumen() {
           deudas: totalDeudas,
         })
       } else {
-        const gastosList2 = await getGastosFijos()
-        const deudasList2 = await getDeudas()
+        const gastosList2 = await getGastosFijos(usuarioId)
+        const deudasList2 = await getDeudas(usuarioId)
         const totalGastos = gastosList2?.reduce((sum, g) => sum + (g.monto || 0), 0) || 0
         const totalDeudas = deudasList2?.reduce((sum, d) => sum + ((d.monto_total || 0) - (d.monto_pagado || 0)), 0) || 0
 

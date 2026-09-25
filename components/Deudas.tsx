@@ -3,7 +3,11 @@
 import { useState, useEffect } from 'react'
 import { getDeudas, addDeuda, updateDeuda, deleteDeuda } from '@/lib/api'
 
-export function Deudas() {
+interface DeudasProps {
+  usuarioId?: string
+}
+
+export function Deudas({ usuarioId }: DeudasProps) {
   const [deudas, setDeudas] = useState<any[]>([])
   const [form, setForm] = useState({
     nombre: '',
@@ -18,7 +22,7 @@ export function Deudas() {
 
   const loadDeudas = async () => {
     try {
-      const data = await getDeudas()
+      const data = await getDeudas(usuarioId)
       if (data && data.length > 0) {
         setDeudas(data)
       }
@@ -36,6 +40,7 @@ export function Deudas() {
 
     try {
       await addDeuda({
+        usuario_id: usuarioId,
         nombre: form.nombre,
         monto_total: parseFloat(form.monto_total),
         monto_pagado: parseFloat(form.monto_pagado),

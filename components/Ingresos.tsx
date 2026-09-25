@@ -3,7 +3,11 @@
 import { useState, useEffect } from 'react'
 import { getIngresosFijos, addIngresoFijo, deleteIngresoFijo } from '@/lib/api'
 
-export function Ingresos() {
+interface IngresosProps {
+  usuarioId?: string
+}
+
+export function Ingresos({ usuarioId }: IngresosProps) {
   const [ingresos, setIngresos] = useState<any[]>([])
   const [form, setForm] = useState({ nombre: '', monto: '', frecuencia: 'mensual' })
 
@@ -13,7 +17,7 @@ export function Ingresos() {
 
   const loadIngresos = async () => {
     try {
-      const data = await getIngresosFijos()
+      const data = await getIngresosFijos(usuarioId)
       if (data && data.length > 0) {
         setIngresos(data)
       }
@@ -31,6 +35,7 @@ export function Ingresos() {
 
     try {
       await addIngresoFijo({
+        usuario_id: usuarioId,
         nombre: form.nombre,
         monto: parseFloat(form.monto),
         frecuencia: form.frecuencia as 'semanal' | 'quincena' | 'mensual',

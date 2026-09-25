@@ -7,6 +7,7 @@ export const supabase = createClient(supabaseUrl, supabaseKey)
 
 export type Movimiento = {
   id?: string
+  usuario_id?: string
   fecha: string
   tipo: 'Ingreso Trabajo 1' | 'Ingreso Trabajo 2' | 'Propina' | 'Abono Deuda'
   trabajo_deuda: string
@@ -18,6 +19,7 @@ export type Movimiento = {
 
 export type IngresoFijo = {
   id?: string
+  usuario_id?: string
   nombre: string
   monto: number
   frecuencia: 'quincena' | 'mensual' | 'semanal'
@@ -26,6 +28,7 @@ export type IngresoFijo = {
 
 export type GastoFijo = {
   id?: string
+  usuario_id?: string
   nombre: string
   monto: number
   dia_vencimiento: number
@@ -34,6 +37,7 @@ export type GastoFijo = {
 
 export type Deuda = {
   id?: string
+  usuario_id?: string
   nombre: string
   monto_total: number
   monto_pagado: number

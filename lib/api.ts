@@ -1,12 +1,18 @@
 import { supabase, Movimiento, IngresoFijo, GastoFijo, Deuda, Usuario } from './supabase'
 
 // MOVIMIENTOS
-export async function getMovimientos(): Promise<Movimiento[]> {
+export async function getMovimientos(usuarioId?: string): Promise<Movimiento[]> {
   try {
-    const { data, error } = await supabase
+    let query = supabase
       .from('movimientos')
       .select('*')
       .order('fecha', { ascending: false })
+
+    if (usuarioId) {
+      query = query.eq('usuario_id', usuarioId)
+    }
+
+    const { data, error } = await query
 
     if (error) {
       console.error('Error getMovimientos:', error)
@@ -26,13 +32,10 @@ export async function addMovimiento(movimiento: Omit<Movimiento, 'id' | 'created
       .insert([movimiento])
       .select()
 
-    if (error) {
-      console.error('Error addMovimiento:', error)
-      throw error
-    }
+    if (error) throw error
     return data
   } catch (error) {
-    console.error('Exception addMovimiento:', error)
+    console.error('Error addMovimiento:', error)
     throw error
   }
 }
@@ -68,11 +71,17 @@ export async function deleteMovimiento(id: string) {
 }
 
 // INGRESOS FIJOS
-export async function getIngresosFijos(): Promise<IngresoFijo[]> {
+export async function getIngresosFijos(usuarioId?: string): Promise<IngresoFijo[]> {
   try {
-    const { data, error } = await supabase
+    let query = supabase
       .from('ingresos_fijos')
       .select('*')
+
+    if (usuarioId) {
+      query = query.eq('usuario_id', usuarioId)
+    }
+
+    const { data, error } = await query
 
     if (error) {
       console.error('Error getIngresosFijos:', error)
@@ -131,11 +140,17 @@ export async function deleteIngresoFijo(id: string) {
 }
 
 // GASTOS FIJOS
-export async function getGastosFijos(): Promise<GastoFijo[]> {
+export async function getGastosFijos(usuarioId?: string): Promise<GastoFijo[]> {
   try {
-    const { data, error } = await supabase
+    let query = supabase
       .from('gastos_fijos')
       .select('*')
+
+    if (usuarioId) {
+      query = query.eq('usuario_id', usuarioId)
+    }
+
+    const { data, error } = await query
 
     if (error) {
       console.error('Error getGastosFijos:', error)
@@ -194,11 +209,17 @@ export async function deleteGastoFijo(id: string) {
 }
 
 // DEUDAS
-export async function getDeudas(): Promise<Deuda[]> {
+export async function getDeudas(usuarioId?: string): Promise<Deuda[]> {
   try {
-    const { data, error } = await supabase
+    let query = supabase
       .from('deudas')
       .select('*')
+
+    if (usuarioId) {
+      query = query.eq('usuario_id', usuarioId)
+    }
+
+    const { data, error } = await query
 
     if (error) {
       console.error('Error getDeudas:', error)
@@ -257,9 +278,9 @@ export async function deleteDeuda(id: string) {
 }
 
 // RESUMEN (Stats)
-export async function getResumen() {
+export async function getResumen(usuarioId?: string) {
   try {
-    const movimientos = await getMovimientos()
+    const movimientos = await getMovimientos(usuarioId)
 
     const ingresos = movimientos
       .filter(m => ['Ingreso Trabajo 1', 'Ingreso Trabajo 2', 'Propina', 'Abono Deuda'].includes(m.tipo))
@@ -269,7 +290,7 @@ export async function getResumen() {
       .filter(m => !['Ingreso Trabajo 1', 'Ingreso Trabajo 2', 'Propina', 'Abono Deuda'].includes(m.tipo))
       .reduce((sum, m) => sum + m.monto, 0)
 
-    const deudas = await getDeudas()
+    const deudas = await getDeudas(usuarioId)
     const totalDeuda = deudas.reduce((sum, d) => sum + (d.monto_total - d.monto_pagado), 0)
 
     return {

@@ -6,9 +6,10 @@ import { getIngresosFijos, getDeudas, addDeuda, deleteDeuda } from '@/lib/api'
 
 interface FormMovimientoProps {
   onSubmit: (movimiento: Movimiento) => Promise<void>
+  usuarioId?: string
 }
 
-export function FormMovimiento({ onSubmit }: FormMovimientoProps) {
+export function FormMovimiento({ onSubmit, usuarioId }: FormMovimientoProps) {
   const [fecha, setFecha] = useState('')
   const [tipo, setTipo] = useState('')
   const [trabajo, setTrabajo] = useState('')
@@ -31,7 +32,7 @@ export function FormMovimiento({ onSubmit }: FormMovimientoProps) {
 
   const loadData = async () => {
     try {
-      const [ing, deu] = await Promise.all([getIngresosFijos(), getDeudas()])
+      const [ing, deu] = await Promise.all([getIngresosFijos(usuarioId), getDeudas(usuarioId)])
       setIngresos(ing || [])
       setDeudas(deu || [])
     } catch (error) {
@@ -49,6 +50,7 @@ export function FormMovimiento({ onSubmit }: FormMovimientoProps) {
     setLoading(true)
     try {
       await onSubmit({
+        usuario_id: usuarioId,
         fecha,
         tipo: tipo as any,
         trabajo_deuda: tipo === 'Abono Deuda' ? deuda : trabajo,
@@ -79,6 +81,7 @@ export function FormMovimiento({ onSubmit }: FormMovimientoProps) {
     }
     try {
       await addDeuda({
+        usuario_id: usuarioId,
         nombre: newDeudaNombre,
         monto_total: parseFloat(newDeudaMonto),
         monto_pagado: 0,
