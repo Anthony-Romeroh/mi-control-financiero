@@ -4,11 +4,7 @@ import { useState, useEffect } from 'react'
 import { getIngresosFijos, addIngresoFijo, deleteIngresoFijo } from '@/lib/api'
 
 export function Ingresos() {
-  const [ingresos, setIngresos] = useState<any[]>([
-    { id: '1', nombre: 'Trabajo 1', monto: 2500, frecuencia: 'quincena' },
-    { id: '2', nombre: 'Trabajo 2', monto: 1800, frecuencia: 'mensual' },
-    { id: '3', nombre: 'Propinas', monto: 1250.50, frecuencia: 'semanal' },
-  ])
+  const [ingresos, setIngresos] = useState<any[]>([])
   const [form, setForm] = useState({ nombre: '', monto: '', frecuencia: 'mensual' })
 
   useEffect(() => {

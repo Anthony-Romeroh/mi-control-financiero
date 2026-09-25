@@ -1,4 +1,4 @@
-﻿'use client'
+'use client'
 
 import { useState } from 'react'
 import { Sidebar } from '@/components/Sidebar'
@@ -23,13 +23,13 @@ export default function Home() {
   return (
     <div style={styles.container}>
       <Sidebar activeScreen={activeScreen} onScreenChange={setActiveScreen} />
-      
+
       <main style={styles.main}>
         <header style={styles.header}>
           <h1 style={styles.headerTitle}>Mi Control Financiero</h1>
           <div style={styles.headerActions}>
-            <button style={styles.headerBtn}>âš™ï¸</button>
-            <button style={styles.headerBtn}>ðŸ””</button>
+            <a href="/manual" style={{...styles.headerBtn, textDecoration: 'none', color: 'inherit'}}>📖</a>
+            <button style={styles.headerBtn}>⚙️</button>
           </div>
         </header>
 
@@ -103,4 +103,3 @@ const styles = {
     textAlign: 'center' as const,
   },
 }
-

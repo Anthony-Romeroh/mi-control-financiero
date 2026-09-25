@@ -5,19 +5,13 @@ import { getMovimientos } from '@/lib/api'
 
 export function Resumen() {
   const [stats, setStats] = useState({
-    saldo: 3280.50,
-    ingresos: 5550.50,
-    gastos: 1270,
-    deudas: 10800,
+    saldo: 0,
+    ingresos: 0,
+    gastos: 0,
+    deudas: 0,
   })
   const [loading, setLoading] = useState(false)
-  const [movimientos, setMovimientos] = useState<any[]>([
-    { id: '1', fecha: '2026-09-24', tipo: 'Ingreso Trabajo 1', descripcion: 'Quincena trabajo', monto: 2500 },
-    { id: '2', fecha: '2026-09-23', tipo: 'Propina', descripcion: 'Propina del día', monto: 150 },
-    { id: '3', fecha: '2026-09-20', tipo: 'Ingreso Trabajo 2', descripcion: 'Pago mensual', monto: 1800 },
-    { id: '4', fecha: '2026-09-15', tipo: 'Abono Deuda', descripcion: 'Pago tarjeta', monto: 500 },
-    { id: '5', fecha: '2026-09-10', tipo: 'Propina', descripcion: 'Propina extra', monto: 100.50 },
-  ])
+  const [movimientos, setMovimientos] = useState<any[]>([])
 
   useEffect(() => {
     loadData()

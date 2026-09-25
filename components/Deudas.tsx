@@ -4,11 +4,7 @@ import { useState, useEffect } from 'react'
 import { getDeudas, addDeuda, updateDeuda, deleteDeuda } from '@/lib/api'
 
 export function Deudas() {
-  const [deudas, setDeudas] = useState<any[]>([
-    { id: '1', nombre: 'Tarjeta de crédito', monto_total: 3500, monto_pagado: 500, dia_vencimiento: 10 },
-    { id: '2', nombre: 'Préstamo personal', monto_total: 2000, monto_pagado: 200, dia_vencimiento: 15 },
-    { id: '3', nombre: 'Cuota auto', monto_total: 8000, monto_pagado: 2000, dia_vencimiento: 25 },
-  ])
+  const [deudas, setDeudas] = useState<any[]>([])
   const [form, setForm] = useState({
     nombre: '',
     monto_total: '',

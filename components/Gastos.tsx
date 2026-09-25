@@ -4,12 +4,7 @@ import { useState, useEffect } from 'react'
 import { getGastosFijos, addGastoFijo, deleteGastoFijo } from '@/lib/api'
 
 export function Gastos() {
-  const [gastos, setGastos] = useState<any[]>([
-    { id: '1', nombre: 'Alquiler', monto: 800, dia_vencimiento: 5 },
-    { id: '2', nombre: 'Servicios', monto: 120, dia_vencimiento: 15 },
-    { id: '3', nombre: 'Internet', monto: 50, dia_vencimiento: 20 },
-    { id: '4', nombre: 'Comida', monto: 300, dia_vencimiento: 28 },
-  ])
+  const [gastos, setGastos] = useState<any[]>([])
   const [form, setForm] = useState({ nombre: '', monto: '', dia_vencimiento: '1' })
 
   useEffect(() => {
